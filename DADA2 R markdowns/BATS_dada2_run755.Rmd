@@ -138,17 +138,20 @@ saveRDS(seqtab.nochim, "dadaFs_Nseqtab.nochim.rds")
 ```
 
 
-#Sanity check-Lane 1
+#Sanity check
 ```{r}
 getN <- function(x) sum(getUniques(x))
-track <- cbind(out_full, sapply(dadaFs, getN), sapply(dadaRs, getN), sapply(mergers, getN), rowSums(seqtab.nochim))
-# If processing a single sample, remove the sapply calls: e.g. replace sapply(dadaFs, getN) with getN(dadaFs)
-colnames(track) <- c("input", "filtered", "denoisedF", "denoisedR", "merged", "nonchim")
-rownames(track) <- sample.names
+track <- cbind(
+  out_filt,
+  denoisedF = sapply(dadaFs, getN),
+  denoisedR = sapply(dadaRs, getN),
+  merged = sapply(mergers, getN),
+  nonchim = rowSums(seqtab.nochim)
+)
 head(track)
 ```
 
-#Assign taxa to Lane 1
+#Assign taxa
 ```{r}
 #assign taxonomy to DNA sequences usings SILVA reference database
 taxa <- assignTaxonomy(seqtab.nochim, "/Users/ndames/Library/CloudStorage/Dropbox/Postdoc/Worden_Postdoc_2024_2026/Archaea_LTT/DADA2_Test/silva_nr99_v138.2_toSpecies_trainset.fa", tryRC=TRUE)
