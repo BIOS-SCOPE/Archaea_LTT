@@ -9,3 +9,5 @@ Taxanomic database used here (March 2026) is: Silva v138.2
   ## Note 2
   Noticed (1 October 2026) that run_751 have swapped primers in the R1 and R2 files, according to the quality plots it seems as if they were run in reverse at the sequencing facility. Will check all the runs.
   
+  ## Note 3 (11 Nov 2026)
+  Rerunning all dada2 for all runs. Swapping reverse runs in cutadapt, trimming primers there instead of using trimleft= in dada2. Will also merge, identify chimers and classify a single feature table in dada2. Upload updated scripts soon
